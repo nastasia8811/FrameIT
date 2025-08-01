@@ -1,41 +1,106 @@
-"use client"
-
+"use client";
+import React, {useState} from "react";
 import {useTheme} from "@/app/contextes/ThemeContext";
-import React from "react";
+import {SunIcon, MoonIcon} from "@heroicons/react/24/outline";
+
+const navLinks = [
+    {label: "Main", href: "#"},
+    {label: "About us", href: "#"},
+    {label: "Contacts", href: "#"},
+];
 
 const Header = () => {
-    const { theme, toggleTheme, colors } = useTheme();
+    const {theme, toggleTheme, colors} = useTheme();
+    const [menuOpen, setMenuOpen] = useState(false);
+
     return (
-        <header className="fixed top-0 left-0 w-full bg-primary text-white shadow-md" style={{position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100%",
-            zIndex: 1000 }}>
+        <header className="fixed top-0 left-0 w-full bg-primary text-white shadow-md z-50" style={{
+            background: 'linear-gradient(135deg, rgba(155,77,255,0.6), rgba(29,53,87,0.6))',
+        }}>
             <div className="max-w-screen-xl mx-auto flex items-center justify-between p-4">
-                <h1 className="text-2xl font-bold" style={{  cursor: "pointer"}} >Логотип</h1>
+                <img src="logo.svg" alt="Logo" className="h-8 cursor-pointer"/>
                 <nav className="hidden md:flex space-x-6">
-                    <a href="#" className="hover:text-accent transition" style={{  cursor: "pointer"}}>Главная</a>
-                    <a href="#" className="hover:text-accent transition" style={{  cursor: "pointer"}}>О нас</a>
-                    <a href="#" className="hover:text-accent transition" style={{  cursor: "pointer"}}>Контакты</a>
+                    {navLinks.map((link) => (
+                        <a
+                            key={link.label}
+                            href={link.href}
+
+                            className=" hover:text-accent transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 ..."
+                        >
+                            {link.label}
+                        </a>
+                    ))}
                 </nav>
+
                 <button
-                    style={{
-                        backgroundColor: colors.buttonBackground,
-                        color: colors.buttonText,
-                        padding: "10px 20px",
-                        border: "1px solid colors.border",
-                        cursor: "pointer",
-                        borderRadius: "18px",
-                    }}
                     onClick={toggleTheme}
+                    className="md:inline-flex p-2 transition"
+                    style={{color: colors.primary}}
+                    aria-label={
+                        theme === "light" ? "Switch to dark mode" : "Switch to light mode"
+                    }
                 >
-                    jhldkhlks {theme} kfhdsh
+                    {theme === "light" ? (
+                        <MoonIcon className="h-6 w-6"/>
+                    ) : (
+                        <SunIcon className="h-6 w-6"/>
+                    )}
                 </button>
-                <button className="md:hidden p-2">☰</button>
+
+                <button
+                    className="md:hidden p-2 text-white"
+                    onClick={() => setMenuOpen(true)}
+                    aria-label="Open menu"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M4 6h16M4 12h16M4 18h16"
+                        />
+                    </svg>
+                </button>
             </div>
+
+            {menuOpen && (
+                <div
+                    className="fixed inset-0 z-40 bg-primary bg-opacity-95 backdrop-blur-sm flex flex-col items-center justify-center space-y-8 text-2xl px-6 transition-all duration-300 md:hidden">
+                    <button
+                        onClick={() => setMenuOpen(false)}
+                        className="absolute top-5 right-5 text-white text-3xl"
+                        aria-label="Close menu"
+                    >
+                        ✕
+                    </button>
+
+                    {navLinks.map((link) => (
+                        <a
+                            key={link.label}
+                            href={link.href}
+                            onClick={() => setMenuOpen(false)}
+                            className="hover:text-accent transition"
+                        >
+                            {link.label}
+                        </a>
+                    ))}
+
+                    <button
+                        onClick={toggleTheme}
+                        className="mt-8 p-2 border rounded-full border-white text-white hover:text-accent transition"
+                    >
+                        {theme === "light" ? "Dark Mode" : "Light Mode"}
+                    </button>
+                </div>
+            )}
         </header>
     );
 };
 
 export default Header;
-

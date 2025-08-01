@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@tanstack/react-query": "^5.66.5",
+    "@heroicons/react": "^2.2.0",
+    "@tanstack/react-query": "^5.83.0",
+    "framer-motion": "^12.23.12",
     "i18next-browser-languagedetector": "^3.0.0",
     "next": "15.1.7",
     "react": "^19.0.0",

@@ -13,10 +13,10 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     const [theme, setTheme] = useState<Theme>("light");
-    const [isClient, setIsClient] = useState(false); // Используем для отслеживания рендеринга на клиенте
+    const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
-        // Это выполнится только на клиенте
+
         setIsClient(true);
 
         const savedTheme = localStorage.getItem("theme") as Theme;
@@ -28,7 +28,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     const colors = getThemeColors(theme);
 
     useEffect(() => {
-        if (isClient) { // Теперь стиль меняется только на клиенте
+        if (isClient) {
             document.documentElement.style.background = colors.background;
             document.documentElement.style.color = colors.text;
             localStorage.setItem("theme", theme);

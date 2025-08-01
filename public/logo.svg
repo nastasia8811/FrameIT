@@ -1,0 +1,28 @@
+<svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="FrameIt Logo">
+    <style>
+        :root {
+        --logo-primary-dark: #c084fc;
+        --logo-shadow-dark: #8b5cf6;
+        --logo-primary-light: #7c3aed;
+        --logo-shadow-light: #d8b4fe;
+        }
+
+        @media (prefers-color-scheme: dark) {
+        .main-text {
+        fill: var(--logo-primary-dark);
+        filter: drop-shadow(0 0 4px var(--logo-shadow-dark));
+        }
+        }
+
+        @media (prefers-color-scheme: light) {
+        .main-text {
+        fill: var(--logo-primary-light);
+        filter: drop-shadow(0 0 3px var(--logo-shadow-light));
+        }
+        }
+    </style>
+    <text x="10" y="40" font-family="Segoe UI, sans-serif" font-size="52" font-weight="bold" class="main-text">
+        FrameIt
+    </text>
+</svg>
