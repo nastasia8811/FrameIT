@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useState, useContext, ReactNode, useCallback, useEffect } from "react";
+import { createContext, useState, useContext, ReactNode, useCallback, useEffect } from "react";
 import { getThemeColors, Theme } from "@/app/theme";
 
 interface ThemeContextType {
@@ -16,9 +16,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
-
         setIsClient(true);
-
         const savedTheme = localStorage.getItem("theme") as Theme;
         if (savedTheme) {
             setTheme(savedTheme);

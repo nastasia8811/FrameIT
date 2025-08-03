@@ -1,5 +1,5 @@
 "use client"
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {useTheme} from "@/app/contextes/ThemeContext";
 import Image from "next/image";
 import {usePopularMovies} from '@/hooks/usePopularMovies';

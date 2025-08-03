@@ -26,7 +26,7 @@ type MovieDetailProps = {
     movieId: number;
 };
 
-const MovieDetail: React.FC<MovieDetailProps> = ({movieId}) => {
+const MovieDetail = ({movieId}: MovieDetailProps) => {
     const [movie, setMovie] = useState<MovieDetails | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);

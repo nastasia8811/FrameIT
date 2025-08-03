@@ -4,7 +4,7 @@ export interface Movie {
     id: number;
     title: string;
     poster_path: string ;
-    vote_average: number;
+    vote_average?: number;
 }
 
 /** Відповідь TMDB на запит популярних */

@@ -1,21 +1,8 @@
 'use client';
 
-import React from 'react';
-import {motion, Variants} from 'framer-motion';
+import {motion} from 'framer-motion';
 
-const circleVariants: Variants = {
-    animate: {
-        scale: [1, 1.5, 1],
-        opacity: [1, 0.5, 1],
-        transition: {
-            duration: 1.5,
-            ease: 'easeInOut',
-            repeat: Infinity,
-        },
-    },
-};
-
-export default function AirLoader() {
+const AirLoader=()=> {
     return (
         <div className="flex items-center justify-center h-48 w-48">
             <div className="relative w-20 h-20">
@@ -44,3 +31,5 @@ export default function AirLoader() {
         </div>
     );
 }
+
+export default AirLoader

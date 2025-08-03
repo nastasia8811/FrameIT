@@ -1,8 +1,6 @@
 "use client";
-import React from "react";
 
 const navLinks = [
-    { label: "Main", href: "#" },
     { label: "About us", href: "#" },
     { label: "Contacts", href: "#" },
 ];

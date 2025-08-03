@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect, useRef, useState, useMemo} from "react";
+import  {FC, useEffect, useRef, useState, useMemo} from "react";
 import {useTheme} from "@/app/contextes/ThemeContext";
 import Header from "@/app/components/Header";
 import Hero from "@/app/components/Hero";
@@ -13,11 +13,12 @@ import Footer from "@/app/components/Footer";
 import AirLoader from "@/app/components/Loader";
 import Filter from "@/app/components/Filter";
 
-const App: React.FC = () => {
+const App: FC = () => {
     const {colors} = useTheme();
     const {pages, loadMore, hasMore, loading, error} = usePopularMovies();
     const observerRef = useRef<IntersectionObserver | null>(null);
     const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
+    const [activeCardId, setActiveCardId] = useState<number | null>(null);
 
     const uniqueMovies = useMemo(() => {
         const seen = new Set<number>();
@@ -44,6 +45,13 @@ const App: React.FC = () => {
         };
     }, [loadMore, hasMore, loading]);
 
+    const getRandomMovies = (movies: Movie[], count: number): Movie[] => {
+        const shuffled = [...movies].sort(() => Math.random() - 0.5);
+        return shuffled.slice(0, count);
+    };
+
+    const featuredRandomMovies = useMemo(() => getRandomMovies(uniqueMovies, 4), [uniqueMovies]);
+
     return (
         <div className="flex flex-col min-h-screen">
             <Modal isOpen={!!selectedMovie} onClose={() => setSelectedMovie(null)}>
@@ -54,12 +62,7 @@ const App: React.FC = () => {
                 style={{background: colors.background, color: colors.text}}
             >
                 <Header/>
-                <Hero title="Trending This Week" movies={[
-                    {id: 1, title: "Inception", posterUrl: "/posters/inception.jpg"} as Movie,
-                    {id: 2, title: "The Dark Knight", posterUrl: "/posters/dark-knight.jpg"} as Movie,
-                    {id: 3, title: "Interstellar", posterUrl: "/posters/interstellar.jpg"} as Movie,
-                    {id: 4, title: "Tenet", posterUrl: "/posters/tenet.jpg"} as Movie,
-                ]}/>
+                <Hero title="Trending This Week" movies={featuredRandomMovies}/>
 
                 <main className="pt-[100px]">
                     <h1 className="text-center font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-8"
@@ -72,16 +75,21 @@ const App: React.FC = () => {
 
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
                         {uniqueMovies.map((movie) => (
-                            <div key={movie.id} onClick={() => setSelectedMovie(movie)} className="cursor-pointer">
-                                <Card movie={movie}/>
-                            </div>
+                            <Card
+                                key={movie.id}
+                                movie={movie}
+                                isActive={movie.id === activeCardId}
+                                onToggle={() => setActiveCardId(movie.id === activeCardId ? null : movie.id)}
+                                onDetailsClick={() => {
+                                    setSelectedMovie(movie);
+                                    setActiveCardId(null);
+                                }}
+                            />
                         ))}
                     </div>
 
                     <div id="load-more-trigger" className="h-10 mb-20">
-                        {loading && <div className="flex items-center justify-center ">
-                            <AirLoader/>
-                        </div>}
+                        {loading && <div className="flex items-center justify-center "><AirLoader/></div>}
                     </div>
                 </main>
             </section>

@@ -1,16 +1,16 @@
 "use client";
 
-import React, { useEffect } from "react";
+import { useEffect,ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { createPortal } from "react-dom";
 
 type ModalProps = {
     isOpen: boolean;
     onClose: () => void;
-    children: React.ReactNode;
+    children: ReactNode;
 };
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+const Modal= ({ isOpen, onClose, children }:ModalProps) => {
     useEffect(() => {
         const onEsc = (e: KeyboardEvent) => {
             if (e.key === "Escape") onClose();
