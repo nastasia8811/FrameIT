@@ -1,5 +1,14 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## 🚧 Development Status
+
+This project is actively evolving. Core features are in place, and the roadmap includes:
+- User authentication
+- Persistent preferences (e.g. favorites)
+- Advanced filtering and sorting
+
+
+
 ## Getting Started
 
 First, run the development server:
