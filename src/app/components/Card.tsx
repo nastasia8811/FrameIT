@@ -2,6 +2,7 @@ import {FC, useEffect, useState} from 'react';
 import type {Movie} from '@/lib/tmdb-types';
 import Image from 'next/image';
 import {useTheme} from "@/app/contextes/ThemeContext";
+import {SVG_PLACEHOLDER} from "@/lib/placeholder";
 
 const Card: FC<{
     movie: Movie;
@@ -34,7 +35,7 @@ const Card: FC<{
 
     const posterUrl = poster_path
         ? `https://image.tmdb.org/t/p/w500${poster_path}`
-        : '/placeholder.png';
+        : SVG_PLACEHOLDER
 
     return (
         <div
@@ -65,7 +66,7 @@ const Card: FC<{
                             href={providerLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="bg-blue-600/80 text-white py-2 px-4 rounded shadow hover:bg-blue-700"
+                            className="bg-white/70 dark:bg-gray-700/70 text-black dark:text-white py-2 px-4 rounded shadow hover:bg-white hover:dark:bg-gray-600"
                             onClick={(e) => e.stopPropagation()}
                         >
                             Watch movie

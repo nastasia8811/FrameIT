@@ -1,5 +1,4 @@
 
-/** Один фільм із списку “popular” */
 export interface Movie {
     id: number;
     title: string;
@@ -7,7 +6,6 @@ export interface Movie {
     vote_average?: number;
 }
 
-/** Відповідь TMDB на запит популярних */
 export interface MoviesResponse {
     page: number;
     results: Movie[];

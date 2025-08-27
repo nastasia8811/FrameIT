@@ -1,24 +1,22 @@
+const BASE = "https://api.themoviedb.org/3";
 
-const BASE = 'https://api.themoviedb.org/3';
+export async function fetcher<T>(path: string, init?: RequestInit): Promise<T> {
+    const isMovieDetails = /^\/movie\/\d+$/.test(path);
 
-export async function fetcher<T>(path: string): Promise<T> {
-    // 1) Розбираємо query‑параметри
     const params = new URLSearchParams();
-    // якщо це деталізація фільму — підтягуємо videos та credits
-    if (path.startsWith('/movie/')) {
-        params.append('append_to_response', 'videos,credits');
-    }
-    // 2) Додаємо обовʼязковий ключ
-    params.append('api_key', process.env.NEXT_PUBLIC_TMDB_API_KEY!);
+    if (isMovieDetails) params.append("append_to_response", "videos,credits");
 
-    // 3) Складаємо повний URL
-    // Якщо в path вже є “?”, то ставимо &, інакше “?”
-    const separator = path.includes('?') ? '&' : '?';
-    const url = `${BASE}${path}${separator}${params.toString()}`;
+    const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY;
+    if (!apiKey) throw new Error("Missing NEXT_PUBLIC_TMDB_API_KEY");
+    params.append("api_key", apiKey);
 
-    const res = await fetch(url);
+    const sep = path.includes("?") ? "&" : "?";
+    const url = `${BASE}${path}${sep}${params.toString()}`;
+
+    const res = await fetch(url, init);
     if (!res.ok) {
-        throw new Error(`TMDB fetch error (${res.status}): ${res.statusText}`);
+        const text = await res.text().catch(() => "");
+        throw new Error(`TMDB fetch error (${res.status}): ${res.statusText}. ${text}`);
     }
-    return res.json();
+    return res.json() as Promise<T>;
 }
