@@ -83,59 +83,74 @@ const App: FC = () => {
         };
     }, [loadMore, hasMore, loading]);
 
+    // IDs
+    const heroHeadingId = "hero-heading";
+    const catalogHeadingId = "catalog-heading";
+    const modalTitleId = selectedMovie ? `movie-title-${selectedMovie.id}` : undefined;
+
     return (
-        <div className="flex flex-col min-h-screen">
-            <Modal isOpen={!!selectedMovie} onClose={() => setSelectedMovie(null)}>
-                {selectedMovie && <MovieDetail movieId={selectedMovie.id} />}
-            </Modal>
+        <div className="flex flex-col min-h-screen" style={{ background: colors.background, color: colors.text }}>
+            <Header />
 
-            <section
-                className="flex-grow p-4 md:p-8 lg:p-12 xl:p-16"
-                style={{ background: colors.background, color: colors.text }}
-            >
-                <Header />
-                <Hero title="Trending This Week" movies={featuredMovies} />
+            <main role="main" id="main" className="flex-grow">
 
-                <main className="pt-[100px]">
+                <section aria-labelledby={heroHeadingId} className="p-4 md:p-8 lg:p-12 xl:p-16">
+                    <Hero title="Trending This Week" movies={featuredMovies} headingId={heroHeadingId} />
+                </section>
+
+                {/* Каталог фильмов — основной контент страницы */}
+                <section aria-labelledby={catalogHeadingId} className="pt-[100px] max-w-screen-xl mx-auto p-4">
                     <h1
+                        id={catalogHeadingId}
                         className="text-center font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-8"
                         style={{ color: colors.primary }}
                     >
                         Movie time – choose your vibe!
                     </h1>
 
-                    {error && <p className="text-red-500">Error: {error}</p>}
+                    {error && <p role="alert" className="text-red-500">Error: {error}</p>}
 
                     <div className="relative mb-24 mt-20">
                         <Filter query={query} setQuery={setQuery} sort={sort} setSort={setSort} />
                     </div>
 
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+                    <ul role="list" className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
                         {filteredMovies.map((movie) => (
-                            <Card
-                                key={movie.id}
-                                movie={movie}
-                                isActive={movie.id === activeCardId}
-                                onToggle={() => setActiveCardId(movie.id === activeCardId ? null : movie.id)}
-                                onDetailsClick={() => {
-                                    setSelectedMovie(movie);
-                                    setActiveCardId(null);
-                                }}
-                            />
+                            <li role="listitem" key={movie.id}>
+                                <Card
+                                    movie={movie}
+                                    isActive={movie.id === activeCardId}
+                                    onToggle={() => setActiveCardId(movie.id === activeCardId ? null : movie.id)}
+                                    onDetailsClick={() => {
+                                        setSelectedMovie(movie);
+                                        setActiveCardId(null);
+                                    }}
+                                />
+                            </li>
                         ))}
-                    </div>
+                    </ul>
 
-                    <div id="load-more-trigger" className="h-10 mb-20">
+                    <div id="load-more-trigger" className="h-10 mb-20" aria-live="polite" aria-atomic="true">
                         {loading && (
                             <div className="flex items-center justify-center">
                                 <AirLoader />
+                                <span className="sr-only">Loading more movies…</span>
                             </div>
                         )}
                     </div>
-                </main>
-            </section>
+                </section>
+            </main>
 
             <Footer />
+
+            <Modal isOpen={!!selectedMovie} onClose={() => setSelectedMovie(null)} ariaLabelledby={modalTitleId}>
+                {selectedMovie && (
+                    <div>
+                        <h2 id={modalTitleId} className="sr-only">{selectedMovie.title}</h2>
+                        <MovieDetail movieId={selectedMovie.id} />
+                    </div>
+                )}
+            </Modal>
         </div>
     );
 };
