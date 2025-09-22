@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 const navLinks = [
     { label: "About us", href: "#" },
     { label: "Contacts", href: "#" },
@@ -14,7 +16,7 @@ const Footer = () => {
             }}
         >
             <div className="max-w-screen-xl mx-auto flex items-center justify-between p-4">
-                <img src="logo.svg" alt="Logo" className="h-8 cursor-pointer" />
+                <Image src="logo.svg" alt="Logo" className="h-8 cursor-pointer" />
 
                 <nav className="hidden md:flex space-x-6">
                     {navLinks.map((link) => (

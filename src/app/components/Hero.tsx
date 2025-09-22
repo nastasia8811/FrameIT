@@ -1,15 +1,17 @@
 "use client";
 import Image from "next/image";
 import { useTheme } from "@/app/contextes/ThemeContext";
-import { SVG_PLACEHOLDER } from "@/lib/placeholder.ts";
+import { SVG_PLACEHOLDER } from "@/lib/placeholder";
 import {Movie} from "@/lib/tmdb-types";
 
 export interface HeroProps {
     title: string;
     movies: Movie[];
+    id?: string;
+
 }
 
-const Hero = ({ title, movies }: HeroProps) => {
+const Hero = ({ title, movies, id }: HeroProps) => {
     const { colors } = useTheme();
 
     return (
@@ -22,7 +24,7 @@ const Hero = ({ title, movies }: HeroProps) => {
                     {title}
                 </h1>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                <div id={id}className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                     {movies.map((movie) => (
                         <div
                             style={{ cursor: "pointer" }}

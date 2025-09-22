@@ -2,6 +2,7 @@
 
 import React, {useEffect, useState} from "react";
 import {fetcher} from "@/lib/tmdb";
+import Image from "next/image";
 
 interface Video {
     key: string;
@@ -87,7 +88,7 @@ const MovieDetail = ({movieId}: MovieDetailProps) => {
                         {cast.slice(0, 10).map((actor) => (
                             <li key={actor.id} className="w-24 text-center text-sm">
                                 {actor.profile_path ? (
-                                    <img
+                                    <Image
                                         src={`https://image.tmdb.org/t/p/w185${actor.profile_path}`}
                                         alt={actor.name}
                                         className="w-24 h-32 object-cover rounded"

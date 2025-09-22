@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { fetcher } from "@/lib/tmdb"
+import { fetcher } from "@/lib/tmdb";
 import type { MoviesResponse, Movie } from '@/lib/tmdb-types';
 
-export const usePopularMovies=()=> {
+export const usePopularMovies = () => {
     const [pages, setPages] = useState<Movie[][]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
@@ -16,8 +16,12 @@ export const usePopularMovies=()=> {
                 const data = await fetcher<MoviesResponse>(`/movie/popular?page=${page}`);
                 setPages(prev => [...prev, data.results]);
                 setHasMore(page < data.total_pages);
-            } catch (e: any) {
-                setError(e.message);
+            } catch (e: unknown) {
+                if (e instanceof Error) {
+                    setError(e.message);
+                } else {
+                    setError("Unknown error");
+                }
             } finally {
                 setLoading(false);
             }
@@ -35,8 +39,8 @@ export const usePopularMovies=()=> {
     return {
         pages,
         loadMore,
-        hasMore, // whether more pages exist
+        hasMore,
         loading,
         error,
     };
-}
+};

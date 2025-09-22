@@ -95,10 +95,9 @@ const App: FC = () => {
             <main role="main" id="main" className="flex-grow">
 
                 <section aria-labelledby={heroHeadingId} className="p-4 md:p-8 lg:p-12 xl:p-16">
-                    <Hero title="Trending This Week" movies={featuredMovies} headingId={heroHeadingId} />
+                    <Hero title="Trending This Week" movies={featuredMovies} id={heroHeadingId} />
                 </section>
 
-                {/* Каталог фильмов — основной контент страницы */}
                 <section aria-labelledby={catalogHeadingId} className="pt-[100px] max-w-screen-xl mx-auto p-4">
                     <h1
                         id={catalogHeadingId}
@@ -143,7 +142,7 @@ const App: FC = () => {
 
             <Footer />
 
-            <Modal isOpen={!!selectedMovie} onClose={() => setSelectedMovie(null)} ariaLabelledby={modalTitleId}>
+            <Modal isOpen={!!selectedMovie} onClose={() => setSelectedMovie(null)}>
                 {selectedMovie && (
                     <div>
                         <h2 id={modalTitleId} className="sr-only">{selectedMovie.title}</h2>

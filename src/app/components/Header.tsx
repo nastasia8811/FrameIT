@@ -2,6 +2,7 @@
 import {useState} from "react";
 import {useTheme} from "@/app/contextes/ThemeContext";
 import {SunIcon, MoonIcon} from "@heroicons/react/24/outline";
+import Image from "next/image";
 
 const navLinks = [
     {label: "Main", href: "#"},
@@ -47,7 +48,7 @@ const Header = () => {
             style={{background: "linear-gradient(135deg, rgba(155,77,255,0.6), rgba(29,53,87,0.6))"}}
         >
             <div className="max-w-screen-xl mx-auto flex items-center justify-between p-4">
-                <img src="logo.svg" alt="Logo" className="h-8 cursor-pointer"/>
+                <Image src="logo.svg" alt="Logo" className="h-8 cursor-pointer"/>
 
                 <nav className="hidden md:flex space-x-6">{renderLinks()}</nav>
 
