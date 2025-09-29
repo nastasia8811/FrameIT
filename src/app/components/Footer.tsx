@@ -16,8 +16,14 @@ const Footer = () => {
             }}
         >
             <div className="max-w-screen-xl mx-auto flex items-center justify-between p-4">
-                <Image src="logo.svg" alt="Logo" className="h-8 cursor-pointer" />
-
+                <div className="relative w-32 h-8">
+                    <Image
+                        src="/logo.svg"
+                        alt="Logo"
+                        fill
+                        className="object-contain cursor-pointer"
+                    />
+                </div>
                 <nav className="hidden md:flex space-x-6">
                     {navLinks.map((link) => (
                         <a
