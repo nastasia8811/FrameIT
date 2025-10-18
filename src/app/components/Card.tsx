@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import type {Movie} from '@/lib/tmdb-types';
 import Image from 'next/image';
 import {useTheme} from "@/app/contextes/ThemeContext";
@@ -51,9 +51,9 @@ const Card: FC<{
             />
 
             {isActive && (
-                <div className="absolute inset-0 bg-black/40 flex items-center justify-center gap-4 backdrop-blur-sm">
+                <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center gap-4 backdrop-blur-sm">
                     <button
-                        className="bg-white/70 dark:bg-gray-700/70 text-black dark:text-white py-2 px-4 rounded shadow hover:bg-white hover:dark:bg-gray-600"
+                        className="inline-flex items-center gap-2 rounded-2xl bg-white/70 py-2 px-4 text-black backdrop-blur transition hover:bg-white/30 active:scale-[0.98]"
                         onClick={(e) => {
                             e.stopPropagation();
                             onDetailsClick();
@@ -66,7 +66,7 @@ const Card: FC<{
                             href={providerLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="bg-white/70 dark:bg-gray-700/70 text-black dark:text-white py-2 px-4 rounded shadow hover:bg-white hover:dark:bg-gray-600"
+                            className="inline-flex items-center gap-2 rounded-2xl bg-white/70 py-2 px-4 text-black backdrop-blur transition hover:bg-white/30 active:scale-[0.98]"
                             onClick={(e) => e.stopPropagation()}
                         >
                             Watch movie
@@ -75,12 +75,13 @@ const Card: FC<{
                 </div>
             )}
 
-            <div className="p-4 flex flex-col justify-between flex-grow" style={{ color: colors.primaryGeneral }}>
-                <h3 className="text-lg font-semibold line-clamp-1">{title}</h3>
-                <p className="mt-1 text-sm">⭐ {vote_average?.toFixed(1)}</p>
-            </div>
-        </div>
-    );
+            <div className="p-4 flex flex-col justify-between flex-grow" style={{color: colors.primaryGeneral}}>
+        <h3 className="text-lg font-semibold line-clamp-1">{title}</h3>
+        <p className="mt-1 text-sm">⭐ {vote_average?.toFixed(1)}</p>
+    </div>
+</div>
+)
+    ;
 };
 
 export default Card;

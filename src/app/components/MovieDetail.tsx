@@ -91,8 +91,11 @@ const MovieDetail = ({movieId}: MovieDetailProps) => {
                                     <Image
                                         src={`https://image.tmdb.org/t/p/w185${actor.profile_path}`}
                                         alt={actor.name}
-                                        className="w-24 h-32 object-cover rounded"
+                                        width={185}
+                                        height={278}
+                                        className="object-cover rounded w-24 h-32"
                                     />
+
                                 ) : (
                                     <div
                                         className="w-24 h-32 bg-gray-300 dark:bg-gray-700 rounded flex items-center justify-center">

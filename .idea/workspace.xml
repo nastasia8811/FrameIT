@@ -5,15 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ec67bda-b347-45d0-9b51-4af923857d96" name="Changes" comment="improve semantic markup and ARIA roles">
+      <change afterPath="$PROJECT_DIR$/public/heroBackground.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/light_background.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/poster.jpeg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/Footer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/Card.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/Card.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/Filter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/Filter.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/components/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/Header.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/components/Hero.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/Hero.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/components/MovieDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/MovieDetail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/PopularMovies.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/PopularMovies.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/theme_example.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/usePopularMovies.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/usePopularMovies.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/placeholder.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/placeholder.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +35,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/nastasia8811/FrameIT.git&quot;,
-    &quot;accountId&quot;: &quot;7c43e22e-84b8-4083-b79a-69453053b3e1&quot;
+    &quot;accountId&quot;: &quot;bc981d2c-f4cf-490c-8ce1-e708a735c57e&quot;
   }
 }</component>
   <component name="MarkdownSettingsMigration">
@@ -49,33 +52,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "js.debugger.nextJs.config.created.client": "true",
-    "js.debugger.nextJs.config.created.server": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "npm.build.executor": "Run",
-    "to.speed.mode.migration.done": "true",
-    "ts.external.directory.path": "/Users/melnykanastasia/WebstormProjects/FrameIT/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;ToolWindow.documentation.v2.ShowToolbar&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
+    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.build.executor&quot;: &quot;Run&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/anastasiiamelnyk/WebstormProjects/FrameIT/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public" />
+      <recent name="$PROJECT_DIR$/src/app/components" />
+      <recent name="$PROJECT_DIR$/src/app/popular" />
       <recent name="$PROJECT_DIR$/src/app" />
       <recent name="$PROJECT_DIR$/src/app/pages" />
-      <recent name="$PROJECT_DIR$/src/app/context" />
-      <recent name="$PROJECT_DIR$/src" />
-      <recent name="$PROJECT_DIR$/src/context" />
     </key>
   </component>
   <component name="RunManager" selected="npm.build">
@@ -111,7 +115,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-b598e85cdad2-JavaScript-WS-252.25557.126" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-WS-242.23726.96" />
       </set>
     </attachedChunks>
   </component>
@@ -137,6 +141,8 @@
       <workItem from="1758358040628" duration="1618000" />
       <workItem from="1758529749810" duration="86000" />
       <workItem from="1758557540355" duration="1702000" />
+      <workItem from="1759406807376" duration="9878000" />
+      <workItem from="1760821673714" duration="4786000" />
     </task>
     <task id="LOCAL-00001" summary="refactor, add filter, sort functionality">
       <created>1756303699763</created>

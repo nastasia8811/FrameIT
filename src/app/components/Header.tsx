@@ -1,30 +1,54 @@
 "use client";
-import {useState} from "react";
-import {useTheme} from "@/app/contextes/ThemeContext";
-import {SunIcon, MoonIcon} from "@heroicons/react/24/outline";
+import { useState, useEffect } from "react";
+import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { SunIcon, MoonIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { useTheme } from "@/app/contextes/ThemeContext";
+import Modal from "@/app/components/Modal";
 
-const navLinks = [
-    {label: "Main", href: "#"},
-    {label: "About us", href: "#"},
-    {label: "Contacts", href: "#"},
+
+type NavLink = { label: string; href: string };
+
+const NAV_LINKS: ReadonlyArray<NavLink> = [
+    { label: "Main", href: "/" },
+    { label: "Popular", href: "/" },
+    { label: "Contacts", href: "/" },
 ];
 
-const Header = () => {
-    const {theme, toggleTheme, colors} = useTheme();
+const cx = (...classes: Array<string | false | null | undefined>) => classes.filter(Boolean).join(" ");
+
+const Header = ()=> {
+
+    const pathname = usePathname();
+    const { theme, toggleTheme, colors } = useTheme();
     const [menuOpen, setMenuOpen] = useState(false);
 
-    const renderLinks = (onClick = () => {}) =>
-        navLinks.map(({label, href}) => (
-            <a
-                key={label}
-                href={href}
-                onClick={onClick}
-                className="hover:text-accent transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110"
-            >
-                {label}
-            </a>
-        ));
+    const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname?.startsWith(href));
+
+    useEffect(() => {
+        document.body.classList.toggle("overflow-hidden", menuOpen);
+    }, [menuOpen]);
+
+
+    const DesktopNav = () => (
+        <nav aria-label="Primary" className="hidden md:flex items-center gap-6">
+            {NAV_LINKS.map(({ label, href }) => (
+                <Link
+                    key={label}
+                    href={href}
+                    aria-current={isActive(href) ? "page" : undefined}
+                    className={cx(
+                        "text-sm font-medium transition-transform duration-200",
+                        "hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40",
+                        isActive(href) ? "text-white" : "text-white/80 hover:text-white"
+                    )}
+                >
+                    {label}
+                </Link>
+            ))}
+        </nav>
+    );
 
     const ThemeButton = ({mobile = false, className = ""}) => (
         <button
@@ -44,60 +68,80 @@ const Header = () => {
 
     return (
         <header
-            className="fixed top-0 left-0 w-full text-white shadow-md z-50"
-            style={{background: "linear-gradient(135deg, rgba(155,77,255,0.6), rgba(29,53,87,0.6))"}}
+            className={cx(
+                "fixed inset-x-0 top-0 z-50 text-white",
+                // Glass + gradient bg with good contrast over content
+                "bg-gradient-to-br from-fuchsia-600/60 to-slate-800/60 backdrop-blur supports-[backdrop-filter]:bg-white/5",
+                "shadow-md"
+            )}
+            role="banner"
         >
-            <div className="max-w-screen-xl mx-auto flex items-center justify-between p-4">
-                <div className="relative w-32 h-8">
-                    <Image
-                        src="/logo.svg"
-                        alt="Logo"
-                        fill
-                        className="object-contain cursor-pointer"
-                    />
+            <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
+                {/* Logo */}
+                <Link href="/"
+                      className="relative h-8 w-32 shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">
+                    <Image src="/logo.svg" alt="Logo" fill className="object-contain" priority/>
+                    <span className="sr-only">Home</span>
+                </Link>
+
+                <DesktopNav/>
+
+                <div className="hidden md:inline-flex">
+                    <ThemeButton/>
                 </div>
 
-
-                <nav className="hidden md:flex space-x-6">{renderLinks()}</nav>
-
-                <ThemeButton className="hidden md:inline-flex"/>
-
-                <button
-                    type="button"
-                    className="md:hidden p-2 text-white"
-                    onClick={() => setMenuOpen(true)}
-                    aria-label="Open menu"
-                    aria-expanded={menuOpen}
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
+                {!menuOpen && (
+                    <button
+                        type="button"
+                        className="md:hidden p-2 text-white"
+                        onClick={() => setMenuOpen(true)}
+                        aria-label="Open menu"
+                        aria-controls="mobile-menu"
+                        aria-expanded={menuOpen}
                     >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16"/>
-                    </svg>
-                </button>
+                        <Bars3Icon className="h-6 w-6" />
+                    </button>
+                )}
             </div>
 
             {menuOpen && (
-                <div className="fixed inset-0 z-40 bg-primary bg-opacity-95 backdrop-blur-sm flex flex-col items-center justify-center space-y-8 text-2xl px-6 transition-all duration-300 md:hidden">
-                    <button
-                        type="button"
-                        onClick={() => setMenuOpen(false)}
-                        className="absolute top-5 right-5 text-white text-3xl"
-                        aria-label="Close menu"
-                    >
-                        ✕
-                    </button>
+                <div
+                    id="mobile-menu"
+                    className="fixed inset-0 z-40 flex flex-col items-center justify-center space-y-8 text-2xl px-6
+             bg-black/80 backdrop-blur-sm h-screen w-screen transition-all duration-300 md:hidden"
+                    role="dialog"
+                    aria-modal="true"
+                >
+                        <button
+                            type="button"
+                            onClick={() => setMenuOpen(false)}
+                            className="absolute right-4 top-3 inline-flex h-10 w-10 items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+                            aria-label="Close menu"
+                        >
+                            <XMarkIcon className="h-6 w-6" />
+                        </button>
 
-                    {renderLinks(() => setMenuOpen(false))}
-                    <ThemeButton mobile/>
+                        {NAV_LINKS.map(({ label, href }) => (
+                            <Link
+                                key={label}
+                                href={href}
+                                onClick={() => setMenuOpen(false)}
+                                aria-current={isActive(href) ? "page" : undefined}
+                                className={cx(
+                                    "text-2xl font-semibold tracking-tight",
+                                    isActive(href) ? "text-white" : "text-white/80 hover:text-white"
+                                )}
+                            >
+                                {label}
+                            </Link>
+                        ))}
+
+                        <ThemeButton mobile />
+
                 </div>
             )}
         </header>
     );
-};
+}
 
 export default Header;
