@@ -5,7 +5,6 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { SunIcon, MoonIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useTheme } from "@/app/contextes/ThemeContext";
-import Modal from "@/app/components/Modal";
 
 
 type NavLink = { label: string; href: string };

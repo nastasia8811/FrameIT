@@ -84,8 +84,6 @@ const App: FC = () => {
         };
     }, [loadMore, hasMore, loading]);
 
-    // IDs
-    const heroHeadingId = "hero-heading";
     const catalogHeadingId = "catalog-heading";
     const modalTitleId = selectedMovie ? `movie-title-${selectedMovie.id}` : undefined;
 
