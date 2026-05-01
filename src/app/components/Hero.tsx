@@ -23,7 +23,7 @@ const LIGHT_BACKGROUND_SRC = "/light_background.jpg";
 const TITLE = "Stream new worlds, nightly.";
 const SUBTITLE = "Dive into thousands of films — from cult classics to fresh premieres.";
 
-const Hero=()=> {
+const Hero = () => {
     const reduce = useReducedMotion();
     const { theme } = useTheme();
     const kenBurns = useMemo(() => {

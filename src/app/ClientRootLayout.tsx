@@ -1,18 +1,17 @@
 "use client";
 
-import {ReactNode} from "react";
+import {ReactNode, useState} from "react";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {UserProvider} from "@/context/UserContext";
 import {ThemeProvider} from "@/app/contextes/ThemeContext";
-
 
 interface ClientRootLayoutProps {
     children: ReactNode;
 }
 
-const queryClient = new QueryClient();
-
 const ClientRootLayout = ({children}: ClientRootLayoutProps) => {
+    const [queryClient] = useState(() => new QueryClient());
+
     return (
         <QueryClientProvider client={queryClient}>
             <UserProvider>
@@ -22,5 +21,6 @@ const ClientRootLayout = ({children}: ClientRootLayoutProps) => {
             </UserProvider>
         </QueryClientProvider>
     );
-}
-export default ClientRootLayout
+};
+
+export default ClientRootLayout;

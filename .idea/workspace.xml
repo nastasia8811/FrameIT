@@ -4,7 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="1ec67bda-b347-45d0-9b51-4af923857d96" name="Changes" comment="Update UI styles and layout: improve hero buttons, mobile menu, filters" />
+=======
+    <list default="true" id="1ec67bda-b347-45d0-9b51-4af923857d96" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/ClientRootLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/ClientRootLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/Card.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/Card.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/Hero.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/Hero.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/Modal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/Modal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/MovieDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/MovieDetail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/contextes/ThemeContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/contextes/ThemeContext.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/theme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/theme.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/usePopularMovies.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/usePopularMovies.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/tmdb-types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/tmdb-types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/tmdb.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/tmdb.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tailwind.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+    </list>
+>>>>>>> f1deed4 (Fix bugs: theme colors, SSR layout, dark mode, accessibility, infinite scroll, and navigation)
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,6 +61,7 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< HEAD
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -59,8 +82,29 @@
     "to.speed.mode.migration.done": "true",
     "ts.external.directory.path": "/Users/anastasiiamelnyk/WebstormProjects/FrameIT/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
+=======
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
+    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.build.executor&quot;: &quot;Run&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/melnykanastasia/WebstormProjects/FrameIT/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+>>>>>>> f1deed4 (Fix bugs: theme colors, SSR layout, dark mode, accessibility, infinite scroll, and navigation)
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public" />
@@ -103,7 +147,11 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
+<<<<<<< HEAD
         <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-WS-242.23726.96" />
+=======
+        <option value="bundled-js-predefined-d6986cc7102b-a71380e98a7c-JavaScript-WS-252.28539.21" />
+>>>>>>> f1deed4 (Fix bugs: theme colors, SSR layout, dark mode, accessibility, infinite scroll, and navigation)
       </set>
     </attachedChunks>
   </component>
@@ -128,9 +176,18 @@
       <workItem from="1758285562284" duration="2943000" />
       <workItem from="1758358040628" duration="1618000" />
       <workItem from="1758529749810" duration="86000" />
+<<<<<<< HEAD
       <workItem from="1758557540355" duration="1702000" />
       <workItem from="1759406807376" duration="9878000" />
       <workItem from="1760821673714" duration="5104000" />
+=======
+      <workItem from="1758557540355" duration="2259000" />
+      <workItem from="1758702540837" duration="3953000" />
+      <workItem from="1763415890018" duration="597000" />
+      <workItem from="1766057430918" duration="84000" />
+      <workItem from="1774468431962" duration="21000" />
+      <workItem from="1777550198518" duration="1654000" />
+>>>>>>> f1deed4 (Fix bugs: theme colors, SSR layout, dark mode, accessibility, infinite scroll, and navigation)
     </task>
     <task id="LOCAL-00001" summary="refactor, add filter, sort functionality">
       <created>1756303699763</created>
@@ -146,6 +203,7 @@
       <option name="project" value="LOCAL" />
       <updated>1756814080929</updated>
     </task>
+<<<<<<< HEAD
     <task id="LOCAL-00003" summary="Update UI styles and layout: improve hero buttons, mobile menu, filters">
       <option name="closed" value="true" />
       <created>1760828295012</created>
@@ -153,6 +211,15 @@
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
       <updated>1760828295012</updated>
+=======
+    <task id="LOCAL-00003" summary="make logo image responsive using next/image fill layout">
+      <option name="closed" value="true" />
+      <created>1759163510323</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1759163510323</updated>
+>>>>>>> f1deed4 (Fix bugs: theme colors, SSR layout, dark mode, accessibility, infinite scroll, and navigation)
     </task>
     <option name="localTasksCounter" value="4" />
     <servers />
@@ -179,7 +246,12 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="refactor, add filter, sort functionality" />
     <MESSAGE value="improve semantic markup and ARIA roles" />
+<<<<<<< HEAD
     <MESSAGE value="Update UI styles and layout: improve hero buttons, mobile menu, filters" />
     <option name="LAST_COMMIT_MESSAGE" value="Update UI styles and layout: improve hero buttons, mobile menu, filters" />
+=======
+    <MESSAGE value="make logo image responsive using next/image fill layout" />
+    <option name="LAST_COMMIT_MESSAGE" value="make logo image responsive using next/image fill layout" />
+>>>>>>> f1deed4 (Fix bugs: theme colors, SSR layout, dark mode, accessibility, infinite scroll, and navigation)
   </component>
 </project>

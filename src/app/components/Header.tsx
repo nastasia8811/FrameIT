@@ -6,18 +6,17 @@ import { usePathname } from "next/navigation";
 import { SunIcon, MoonIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useTheme } from "@/app/contextes/ThemeContext";
 
-
 type NavLink = { label: string; href: string };
 
 const NAV_LINKS: ReadonlyArray<NavLink> = [
-    { label: "Main", href: "/" },
-    { label: "Popular", href: "/" },
-    { label: "Contacts", href: "/" },
+    { label: "Main", href: "#" },
+    { label: "Popular", href: "#popular" },
+    { label: "Movies", href: "#movies" },
 ];
 
 const cx = (...classes: Array<string | false | null | undefined>) => classes.filter(Boolean).join(" ");
 
-const Header = ()=> {
+const Header = () => {
 
     const pathname = usePathname();
     const { theme, toggleTheme, colors } = useTheme();
@@ -28,7 +27,6 @@ const Header = ()=> {
     useEffect(() => {
         document.body.classList.toggle("overflow-hidden", menuOpen);
     }, [menuOpen]);
-
 
     const DesktopNav = () => (
         <nav aria-label="Primary" className="hidden md:flex items-center gap-6">
@@ -69,14 +67,12 @@ const Header = ()=> {
         <header
             className={cx(
                 "fixed inset-x-0 top-0 z-50 text-white",
-                // Glass + gradient bg with good contrast over content
                 "bg-gradient-to-br from-fuchsia-600/60 to-slate-800/60 backdrop-blur supports-[backdrop-filter]:bg-white/5",
                 "shadow-md"
             )}
             role="banner"
         >
             <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
-                {/* Logo */}
                 <Link href="/"
                       className="relative h-8 w-32 shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40">
                     <Image src="/logo.svg" alt="Logo" fill className="object-contain" priority/>
@@ -106,7 +102,7 @@ const Header = ()=> {
             {menuOpen && (
                 <div
                     id="mobile-menu"
-                    className="fixed inset-0 z-40 flex flex-col items-center justify-center space-y-8 text-2xl px-6
+                    className="fixed inset-0 z-[60] flex flex-col items-center justify-center space-y-8 text-2xl px-6
              bg-black/80 backdrop-blur-sm h-screen w-screen transition-all duration-300 md:hidden"
                     role="dialog"
                     aria-modal="true"

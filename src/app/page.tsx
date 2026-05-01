@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useEffect, useMemo, useRef, useState, useDeferredValue } from "react";
+import { FC, useEffect, useMemo, useState, useDeferredValue } from "react";
 import { useTheme } from "@/app/contextes/ThemeContext";
 import Header from "@/app/components/Header";
 import Hero from "@/app/components/Hero";
@@ -17,7 +17,6 @@ import PopularMovies from "@/app/components/PopularMovies";
 const App: FC = () => {
     const { colors } = useTheme();
     const { pages, loadMore, hasMore, loading, error } = usePopularMovies();
-    const observerRef = useRef<IntersectionObserver | null>(null);
 
     const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
     const [activeCardId, setActiveCardId] = useState<number | null>(null);
@@ -40,10 +39,14 @@ const App: FC = () => {
 
     useEffect(() => {
         if (featuredMovies.length === 0 && uniqueMovies.length >= 4) {
-            const shuffled = [...uniqueMovies].sort(() => Math.random() - 0.5);
+            const shuffled = [...uniqueMovies];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
             setFeaturedMovies(shuffled.slice(0, 4));
         }
-    }, [uniqueMovies, featuredMovies.length]);
+    }, [uniqueMovies, featuredMovies]);
 
     const filteredMovies = useMemo(() => {
         const q = deferredQuery.trim().toLowerCase();
@@ -69,19 +72,15 @@ const App: FC = () => {
         const el = document.getElementById("load-more-trigger");
         if (!el) return;
 
-        const obs =
-            observerRef.current ??
-            (observerRef.current = new IntersectionObserver(
-                ([entry]) => {
-                    if (entry.isIntersecting && hasMore && !loading) loadMore();
-                },
-                { rootMargin: "200px" }
-            ));
+        const obs = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting && hasMore && !loading) loadMore();
+            },
+            { rootMargin: "200px" }
+        );
 
         obs.observe(el);
-        return () => {
-            obs.unobserve(el);
-        };
+        return () => obs.disconnect();
     }, [loadMore, hasMore, loading]);
 
     const catalogHeadingId = "catalog-heading";
@@ -91,60 +90,61 @@ const App: FC = () => {
         <div className="flex flex-col min-h-screen" style={{ background: colors.background, color: colors.text }}>
             <Header />
 
-            <main role="main" id="main" className="flex-grow">
+            <main id="main" className="flex-grow">
 
+                <Hero />
 
-                        <Hero  />
+                <PopularMovies
+                    title="Trending This Week"
+                    movies={featuredMovies}
+                    onMovieClick={setSelectedMovie}
+                />
 
+                <section id="movies" aria-labelledby={catalogHeadingId} className="pt-[100px] max-w-screen-xl mx-auto p-4">
+                    <h2
+                        id={catalogHeadingId}
+                        className="text-center font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-8"
+                        style={{color: colors.primary}}
+                    >
+                        Movie time – choose your vibe!
+                    </h2>
 
-                        <PopularMovies title="Trending This Week" movies={featuredMovies}/>
+                    {error && <p role="alert" className="text-red-500">Error: {error}</p>}
 
+                    <div className="relative mb-24 mt-20">
+                        <Filter query={query} setQuery={setQuery} sort={sort} setSort={setSort}/>
+                    </div>
 
-                    <section id="movies" aria-labelledby={catalogHeadingId} className="pt-[100px] max-w-screen-xl mx-auto p-4">
-                        <h1
-                            id={catalogHeadingId}
-                            className="text-center font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-8"
-                            style={{color: colors.primary}}
-                        >
-                            Movie time – choose your vibe!
-                        </h1>
+                    <ul role="list" className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+                        {filteredMovies.map((movie) => (
+                            <li key={movie.id}>
+                                <Card
+                                    movie={movie}
+                                    isActive={movie.id === activeCardId}
+                                    onToggle={() => setActiveCardId(movie.id === activeCardId ? null : movie.id)}
+                                    onDetailsClick={() => {
+                                        setSelectedMovie(movie);
+                                        setActiveCardId(null);
+                                    }}
+                                />
+                            </li>
+                        ))}
+                    </ul>
 
-                        {error && <p role="alert" className="text-red-500">Error: {error}</p>}
-
-                        <div className="relative mb-24 mt-20"  >
-                            <Filter query={query} setQuery={setQuery} sort={sort} setSort={setSort}/>
-                        </div>
-
-                        <ul role="list" className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-                            {filteredMovies.map((movie) => (
-                                <li role="listitem" key={movie.id}>
-                                    <Card
-                                        movie={movie}
-                                        isActive={movie.id === activeCardId}
-                                        onToggle={() => setActiveCardId(movie.id === activeCardId ? null : movie.id)}
-                                        onDetailsClick={() => {
-                                            setSelectedMovie(movie);
-                                            setActiveCardId(null);
-                                        }}
-                                    />
-                                </li>
-                            ))}
-                        </ul>
-
-                        <div id="load-more-trigger" className="h-10 mb-20" aria-live="polite" aria-atomic="true">
-                            {loading && (
-                                <div className="flex items-center justify-center">
-                                    <AirLoader/>
-                                    <span className="sr-only">Loading more movies…</span>
-                                </div>
-                            )}
-                        </div>
-                    </section>
+                    <div id="load-more-trigger" className="h-10 mb-20" aria-live="polite" aria-atomic="true">
+                        {loading && (
+                            <div className="flex items-center justify-center">
+                                <AirLoader/>
+                                <span className="sr-only">Loading more movies…</span>
+                            </div>
+                        )}
+                    </div>
+                </section>
             </main>
 
             <Footer/>
 
-            <Modal isOpen={!!selectedMovie} onClose={() => setSelectedMovie(null)}>
+            <Modal isOpen={!!selectedMovie} onClose={() => setSelectedMovie(null)} ariaLabelledBy={modalTitleId}>
                 {selectedMovie && (
                     <div>
                         <h2 id={modalTitleId} className="sr-only">{selectedMovie.title}</h2>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { fetcher } from "@/lib/tmdb";
 import type { MoviesResponse, Movie } from '@/lib/tmdb-types';
 
@@ -8,33 +8,46 @@ export const usePopularMovies = () => {
     const [hasMore, setHasMore] = useState(true);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const loadedPagesRef = useRef(new Set<number>());
 
     useEffect(() => {
+        if (loadedPagesRef.current.has(currentPage)) return;
+        loadedPagesRef.current.add(currentPage);
+
+        let cancelled = false;
+
         async function loadPage(page: number) {
             setLoading(true);
             try {
                 const data = await fetcher<MoviesResponse>(`/movie/popular?page=${page}`);
-                setPages(prev => [...prev, data.results]);
-                setHasMore(page < data.total_pages);
+                if (!cancelled) {
+                    setPages(prev => [...prev, data.results]);
+                    setHasMore(page < data.total_pages);
+                }
             } catch (e: unknown) {
-                if (e instanceof Error) {
-                    setError(e.message);
-                } else {
-                    setError("Unknown error");
+                if (!cancelled) {
+                    if (e instanceof Error) {
+                        setError(e.message);
+                    } else {
+                        setError("Unknown error");
+                    }
                 }
             } finally {
-                setLoading(false);
+                if (!cancelled) {
+                    setLoading(false);
+                }
             }
         }
 
         loadPage(currentPage);
+        return () => { cancelled = true; };
     }, [currentPage]);
 
-    const loadMore = () => {
+    const loadMore = useCallback(() => {
         if (hasMore && !loading) {
             setCurrentPage(prev => prev + 1);
         }
-    };
+    }, [hasMore, loading]);
 
     return {
         pages,

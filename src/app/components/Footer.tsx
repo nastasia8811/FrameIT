@@ -3,8 +3,8 @@
 import Image from "next/image";
 
 const navLinks = [
-    { label: "About us", href: "#" },
-    { label: "Contacts", href: "#" },
+    { label: "Main", href: "#hero" },
+    { label: "Catalog", href: "#catalog" },
 ];
 
 const Footer = () => {

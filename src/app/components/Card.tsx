@@ -1,8 +1,13 @@
-import React, {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useState, KeyboardEvent} from 'react';
 import type {Movie} from '@/lib/tmdb-types';
 import Image from 'next/image';
 import {useTheme} from "@/app/contextes/ThemeContext";
 import {SVG_PLACEHOLDER} from "@/lib/placeholder";
+import {fetcher} from "@/lib/tmdb";
+
+interface WatchProviderResponse {
+    results: Record<string, { link?: string }>;
+}
 
 const Card: FC<{
     movie: Movie;
@@ -10,19 +15,21 @@ const Card: FC<{
     isActive: boolean;
     onToggle: () => void;
 }> = ({movie, onDetailsClick, isActive, onToggle}) => {
-    const {  colors } = useTheme();
+    const {colors} = useTheme();
     const {id, title, poster_path, vote_average} = movie;
     const [providerLink, setProviderLink] = useState<string | null>(null);
 
     useEffect(() => {
+        if (!isActive) return;
+        let cancelled = false;
+
         async function fetchProvider() {
             try {
-                const res = await fetch(
-                    `https://api.themoviedb.org/3/movie/${id}/watch/providers?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
+                const data = await fetcher<WatchProviderResponse>(
+                    `/movie/${id}/watch/providers`
                 );
-                const data = await res.json();
                 const us = data.results?.US;
-                if (us?.link) {
+                if (!cancelled && us?.link) {
                     setProviderLink(us.link);
                 }
             } catch (e) {
@@ -31,16 +38,28 @@ const Card: FC<{
         }
 
         fetchProvider();
-    }, [id]);
+        return () => { cancelled = true; };
+    }, [id, isActive]);
 
     const posterUrl = poster_path
         ? `https://image.tmdb.org/t/p/w500${poster_path}`
-        : SVG_PLACEHOLDER
+        : SVG_PLACEHOLDER;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            onToggle();
+        }
+    };
 
     return (
         <div
+            role="button"
+            tabIndex={0}
+            aria-label={`Toggle details for ${title}`}
             className="relative bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition flex flex-col h-full cursor-pointer"
             onClick={onToggle}
+            onKeyDown={handleKeyDown}
         >
             <Image
                 src={posterUrl}
@@ -76,12 +95,11 @@ const Card: FC<{
             )}
 
             <div className="p-4 flex flex-col justify-between flex-grow" style={{color: colors.primaryGeneral}}>
-        <h3 className="text-lg font-semibold line-clamp-1">{title}</h3>
-        <p className="mt-1 text-sm">⭐ {vote_average?.toFixed(1)}</p>
-    </div>
-</div>
-)
-    ;
+                <h3 className="text-lg font-semibold line-clamp-1">{title}</h3>
+                <p className="mt-1 text-sm">⭐ {vote_average?.toFixed(1) ?? 'N/A'}</p>
+            </div>
+        </div>
+    );
 };
 
 export default Card;

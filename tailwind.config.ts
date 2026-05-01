@@ -12,6 +12,8 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        primary: "#1D3557",
+        accent: "#9B4DFF",
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"], // Добавляем шрифт

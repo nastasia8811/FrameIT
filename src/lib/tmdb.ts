@@ -1,10 +1,7 @@
 const BASE = "https://api.themoviedb.org/3";
 
 export async function fetcher<T>(path: string, init?: RequestInit): Promise<T> {
-    const isMovieDetails = /^\/movie\/\d+$/.test(path);
-
     const params = new URLSearchParams();
-    if (isMovieDetails) params.append("append_to_response", "videos,credits");
 
     const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY;
     if (!apiKey) throw new Error("Missing NEXT_PUBLIC_TMDB_API_KEY");

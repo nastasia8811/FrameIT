@@ -27,6 +27,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
 
     useEffect(() => {
         if (isClient) {
+            document.documentElement.classList.toggle("dark", theme === "dark");
             document.documentElement.style.background = colors.background;
             document.documentElement.style.color = colors.text;
             localStorage.setItem("theme", theme);

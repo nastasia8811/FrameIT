@@ -1,27 +1,22 @@
-"use client";
-
 import React from "react";
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import type { Metadata } from "next";
 import "./globals.css";
 import ClientRootLayout from "./ClientRootLayout";
 
-const queryClient = new QueryClient();
+export const metadata: Metadata = {
+    title: "FrameIt",
+    description: "Discover and browse popular movies",
+};
 
 export default function RootLayout({
                                        children,
                                    }: Readonly<{ children: React.ReactNode }>) {
     return (
         <html lang="en">
-        <head>
-            <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-            <title>FrameIt</title>
-        </head>
         <body>
-        <QueryClientProvider client={queryClient}>
-            <ClientRootLayout>
-                {children}
-            </ClientRootLayout>
-        </QueryClientProvider>
+        <ClientRootLayout>
+            {children}
+        </ClientRootLayout>
         </body>
         </html>
     );
